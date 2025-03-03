@@ -1,3 +1,5 @@
+
+import "./globals.css"
 import { FileDropper } from "@/components/file-dropper"
 import { Button } from "@/components/ui/button"
 
