@@ -29,7 +29,19 @@ export function Warning(){
                 </AlertDialogDescription>
                 <AlertDialogDescription>
                     <b>2.</b> We do not condone the transference of illegal files.
-                    If you are found to be uploading incriminating files, the authorities will be contacted.
+                    If you are found to be uploading and distributing incriminating files, the authorities will be contacted.
+                </AlertDialogDescription>
+                <AlertDialogDescription>
+                    <b>3.</b> Quickdrop is not responsible for any loss of data.
+                    Please ensure you have a backup of your files.
+                </AlertDialogDescription>
+                <AlertDialogDescription>
+                    <b>4.</b> Quickdrop provides a 10 GB file size limit.
+                    Any files exceeding this limit will be rejected.
+                </AlertDialogDescription>
+                <AlertDialogDescription>
+                    <b>5.</b> By clicking "I Agree", you acknowledge that you have read and understood the terms of use,
+                    and in doing so, you will be held accountable for any actions that violate the terms.
                 </AlertDialogDescription>
                 <AlertDialogFooter>
                     <AlertDialogAction onClick={setDialogOpen}>I Agree</AlertDialogAction>
