@@ -39,10 +39,9 @@ export function Warning(){
                     <b>4.</b> Quickdrop provides a 10 GB file size limit.
                     Any files exceeding this limit will be rejected.
                 </AlertDialogDescription>
-                <AlertDialogDescription>
-                    <b>5.</b> By clicking "I Agree", you acknowledge that you have read and understood the terms of use,
-                    and in doing so, you will be held accountable for any actions that violate the terms.
-                </AlertDialogDescription>
+                By clicking "I Agree", you acknowledge that you have read and understood the terms of use,
+                and in doing so, you will be held accountable for any actions that violate the terms.
+
                 <AlertDialogFooter>
                     <AlertDialogAction onClick={setDialogOpen}>I Agree</AlertDialogAction>
                 </AlertDialogFooter>

@@ -1,16 +1,37 @@
 "use client"
 
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useEffect } from "react"
+import { Button } from "@/components/ui/button"
 import { useDropzone, type FileRejection } from "react-dropzone"
 import { Upload, X } from "lucide-react"
+import { api } from "@/templates/api"
 
 export function FileDropper() {
     const [files, setFiles] = useState<File[]>([])
     const [error, setError] = useState<string | null>(null)
 
+    const handleUpload = async () => {
+        const formData = new FormData();
+        files.forEach((file) => {
+            formData.append("files", file);
+        });
+
+        try {
+            const response = await api.post("http://localhost:8080/api/upload", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            alert(response.data);
+            clearAll();
+        } catch (error) {
+            setError("Upload failed. Please try again.");
+        }
+    };
+
     const onDrop = useCallback((acceptedFiles: File[], fileRejections: FileRejection[]) => {
         if (fileRejections.length > 0) {
-            setError("File(s) rejected. Only images under 5MB are accepted.")
+            setError("File(s) rejected. Only images under 2GB are accepted.")
         } else {
             setError(null)
         }
@@ -20,7 +41,7 @@ export function FileDropper() {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        maxSize: 10 * 1024 * 1024 * 1024 // 10 GB
+        maxSize: 2 * 1024 * 1024 * 1024 // 10 GB
     })
 
     const formatFileSize = (bytes: number) => {
@@ -61,11 +82,31 @@ export function FileDropper() {
                 <input {...getInputProps()} aria-label="File upload" />
                 <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
                 {isDragActive ? (
-                    <p>Drop the files here...</p>
+                    <p>Drop the files here.</p>
                 ) : (
-                    <p>Drag 'n' drop images here, or click to select (max 10GB)</p>
+                    <p>Drag 'n' drop images here, or click to select (max 2GB)</p>
                 )}
+
             </div>
+            {
+                files.length > 3 ? (
+                    <Button
+                        disabled
+                        className="mt-4 w-full bg-primary text-white py-2 px-4 rounded hover:bg-primary/90"
+                    >
+                        Max files reached (3)
+                    </Button>
+            ) : files.length > 0 && (
+                    <Button
+                        onClick={handleUpload}
+                        className="mt-4 w-full bg-primary text-white py-2 px-4 rounded hover:bg-primary/90"
+                    >
+                        Upload Files
+                    </Button>
+                )
+            }
+
+
 
             {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
 

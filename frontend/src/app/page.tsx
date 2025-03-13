@@ -7,19 +7,6 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react";
 
 export default function Page() {
-    const [test, setTest] = useState("");
-
-    const getData = async () => {
-        try {
-            const response = await api.get('/api/testing/helloo');
-            if(response){
-                setTest(response.data);
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    //getData();
     return (
         <div className="flex flex-col min-h-svh">
             <Warning></Warning>

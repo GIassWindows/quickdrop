@@ -66,3 +66,6 @@ bin/
 .next/
 out/
 node_modules/
+
+### Spring Boot ###
+./application.properties
